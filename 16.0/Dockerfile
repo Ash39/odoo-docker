@@ -62,6 +62,8 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
     && apt-get -y install --no-install-recommends ./odoo.deb \
     && rm -rf /var/lib/apt/lists/* odoo.deb
 
+RUN ls
+
 # Copy entrypoint script and Odoo configuration file.
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
@@ -77,6 +79,8 @@ EXPOSE 8069 8071 8072
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo.conf
+
+RUN ls /etc/odoo/
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
